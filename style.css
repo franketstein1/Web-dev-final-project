@@ -1,8 +1,8 @@
 :root {
   --bg: #0f172a;
   --surface: #1e293b;
-  --text: #f8fafc;
-  --text-muted: #94a3b8;
+  --text: #ffffff;
+  --text-muted: #cbd5e1;
   --accent: #3b82f6;
   --accent-strong: #10b981;
   --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
@@ -14,7 +14,7 @@
   --bg: #f0fdf4;
   --surface: #ffffff;
   --text: #0f172a;
-  --text-muted: #475569;
+  --text-muted: #64748b;
   --accent: #2563eb;
   --accent-strong: #059669;
   --accent-gradient: linear-gradient(135deg, #2563eb, #db2777);
