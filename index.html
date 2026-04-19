@@ -1,8 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inline theme bootstrap: prevents flash of wrong theme -->
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme-override');
+            var theme;
+            if (saved && saved !== '') {
+                theme = saved;
+            } else {
+                var h = new Date().getHours();
+                theme = (h >= 6 && h < 18) ? 'light' : 'dark';
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <title>Aryan Ghimire | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
