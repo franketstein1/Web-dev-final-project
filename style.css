@@ -1,25 +1,39 @@
 :root {
-  --bg: #0f172a;
-  --surface: #1e293b;
-  --text: #3b82f6;
-  --text-muted: #cbd5e1;
-  --accent: #3b82f6;
-  --accent-strong: #10b981;
-  --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  --border: #334155;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --accent: #6366f1;
+  --accent-strong: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+  --border: #d1d5db;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="light"] {
-  --bg: #f0fdf4;
-  --surface: #ffffff;
-  --text: #2563eb;
-  --text-muted: #94a3b8;
-  --accent: #2563eb;
-  --accent-strong: #059669;
-  --accent-gradient: linear-gradient(135deg, #2563eb, #db2777);
-  --border: #e2e8f0;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #e5e7eb;
+    --text-muted: #9ca3af;
+    --accent: #818cf8;
+    --accent-strong: #6366f1;
+    --accent-gradient: linear-gradient(135deg, #818cf8, #a78bfa);
+    --border: #374151;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  }
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --accent: #818cf8;
+  --accent-strong: #6366f1;
+  --accent-gradient: linear-gradient(135deg, #818cf8, #a78bfa);
+  --border: #374151;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -38,8 +52,10 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
   -webkit-font-smoothing: antialiased;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 a {
@@ -52,10 +68,11 @@ a:hover {
   color: var(--accent-strong);
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
   color: var(--text);
   line-height: 1.2;
+  font-weight: 600;
 }
 
 h1 {
@@ -75,7 +92,11 @@ h2 {
 
 p {
   margin-bottom: 1rem;
-  color: var(--text-muted);
+  color: var(--text);
+}
+
+p, span, a {
+  color: var(--text);
 }
 
 button, input, textarea {
