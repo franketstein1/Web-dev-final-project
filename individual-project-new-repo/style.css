@@ -1,23 +1,25 @@
 :root {
-  --bg: #121212;
-  --surface: #1e1e1e;
-  --text: #f3f4f6;
-  --text-muted: #9ca3af;
-  --accent: #60a5fa;
-  --accent-strong: #34d399;
-  --border: #2d2d2d;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #3b82f6;
+  --accent-strong: #10b981;
+  --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --border: #334155;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] {
-  --bg: #f9fafb;
+  --bg: #f0fdf4;
   --surface: #ffffff;
-  --text: #111827;
-  --text-muted: #4b5563;
+  --text: #0f172a;
+  --text-muted: #475569;
   --accent: #2563eb;
   --accent-strong: #059669;
-  --border: #e5e7eb;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --accent-gradient: linear-gradient(135deg, #2563eb, #db2777);
+  --border: #e2e8f0;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -59,6 +61,10 @@ h1, h2, h3 {
 h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 h2 {
@@ -225,12 +231,29 @@ nav {
   border-radius: 16px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  border-color: var(--text-muted);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent);
 }
 
 .card h3 {
@@ -319,18 +342,20 @@ textarea:focus {
 
 .btn {
   width: fit-content;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--accent-gradient);
+  color: #ffffff;
   border: none;
   padding: 12px 32px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: opacity 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
 }
 
 .btn:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 118, 255, 0.23);
   text-decoration: none;
 }
 
