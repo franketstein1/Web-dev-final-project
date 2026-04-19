@@ -35,35 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const htmlEl = document.documentElement;
     const themeToggleBtn = document.getElementById('theme-toggle');
 
-    // Check if user has explicitly overriden the theme
+    // Check if user has explicitly overridden the theme
     let manualThemeOverride = localStorage.getItem('theme-override');
 
     function determineAutoTheme() {
         if (manualThemeOverride) return; // Disable auto if manually set
 
-        const now = new Date();
-        const hour = now.getHours(); // 0 to 23
-
-        // Light Mode: 6:00 AM (6) to 5:59 PM (17)
-        if (hour >= 6 && hour < 18) {
-            setTheme('light', false);
-        } else {
-            setTheme('dark', false);
-        }
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = prefersDark ? 'dark' : 'light';
+        setTheme(theme, false);
     }
 
     function setTheme(theme, isManual = false) {
-        if (theme === 'light') {
-            htmlEl.setAttribute('data-theme', 'light');
-            if (themeToggleBtn) themeToggleBtn.textContent = '🌙';
-        } else {
-            htmlEl.setAttribute('data-theme', 'dark');
-            if (themeToggleBtn) themeToggleBtn.textContent = '☀️';
-        }
-
         if (isManual) {
+            if (theme === 'light') {
+                htmlEl.setAttribute('data-theme', 'light');
+                if (themeToggleBtn) themeToggleBtn.textContent = '🌙';
+            } else {
+                htmlEl.setAttribute('data-theme', 'dark');
+                if (themeToggleBtn) themeToggleBtn.textContent = '☀️';
+            }
             manualThemeOverride = theme;
             localStorage.setItem('theme-override', theme);
+        } else {
+            // For auto theme, remove data-theme to use prefers-color-scheme
+            htmlEl.removeAttribute('data-theme');
+            if (themeToggleBtn) themeToggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
         }
     }
 
@@ -74,19 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
         determineAutoTheme();
     }
 
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (!manualThemeOverride) {
+            determineAutoTheme();
+        }
+    });
+
     // Handle Manual Toggle
     themeToggleBtn.addEventListener('click', () => {
         const currentTheme = htmlEl.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme, true);
     });
-
-    // Optionally check interval to switch themes automatically around 6 AM / 6 PM if NOT overridden
-    setInterval(() => {
-        if (!manualThemeOverride) {
-            determineAutoTheme();
-        }
-    }, 60000); // Check every minute
 
 
     // MOBILE NAVIGATION
